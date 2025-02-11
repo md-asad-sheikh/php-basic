@@ -19,7 +19,7 @@
             $('#descriptionForm').submit(function(e){
                 e.preventDefault(); // Prevent default form submission
                 let data = $(this).serialize();
-                console.log(data);
+                // console.log(data);
                 
                 $.ajax({
                     url: 'submit.php', // Change this to your backend endpoint
