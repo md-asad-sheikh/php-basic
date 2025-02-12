@@ -29,7 +29,7 @@
             </div>
         </form>
 
-        <div id="response" class="alert alert-info" role="alert"></div>
+        <div id="response"></div>
     </div>
 
 
@@ -50,10 +50,10 @@
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function(response) {
-                    $('#response').html('<p>' + response + '</p>');
+                    $("#response").addClass("alert alert-info").attr("role", "alert").html(response);
                 },
                 error: function() {
-                    $('#response').html('<p style="color:red;">Error submitting the form</p>');
+                    $("#response").addClass("alert alert-danger").attr("role", "alert").html('Error submitting the form');
                 }
             });
         });
