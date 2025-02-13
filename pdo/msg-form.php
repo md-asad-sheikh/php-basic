@@ -1,3 +1,21 @@
+<?php
+require_once __DIR__ . "/config.php";
+
+$serial = 1;
+
+try {
+    $select_msg_sql = "SELECT id, details, `from`, `to`, created_at FROM messages";
+    $select_msg_stmt = $pdo->prepare($select_msg_sql);
+    $select_msg_stmt->execute();
+    $messages = $select_msg_stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+$pdo = null;
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,30 +55,22 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Details</th>
+                    <th scope="col">From</th>
+                    <th scope="col">To</th>
+                    <th scope="col">Created At</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                <?php foreach ($messages as $message) { ?>
+                    <tr>
+                        <th scope="row"><?= $serial++; ?></th>
+                        <td><?= $message['details']; ?></td>
+                        <td><?= $message['from']; ?></td>
+                        <td><?= $message['to']; ?></td>
+                        <td><?= $message['created_at']; ?></td>
+                    </tr>
+                <?php } ?>
             </tbody>
         </table>
     </div>
