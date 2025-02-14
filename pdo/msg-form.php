@@ -65,7 +65,7 @@ $pdo = null;
                 <?php foreach ($messages as $message) { ?>
                     <tr>
                         <th scope="row"><?= $serial++; ?></th>
-                        <td><?= $message['details']; ?></td>
+                        <td><?= nl2br(htmlspecialchars($message['details'])); ?></td>
                         <td><?= $message['from']; ?></td>
                         <td><?= $message['to']; ?></td>
                         <td><?= $message['created_at']; ?></td>
