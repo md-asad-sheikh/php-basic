@@ -85,15 +85,16 @@ $pdo = null;
     $(document).ready(function() {
         $('#descriptionForm').submit(function(e) {
             e.preventDefault(); // Prevent default form submission
-            let data = $(this).serialize();
+            let serialize_data = $(this).serialize();
             // console.log(data);
 
             $.ajax({
                 url: 'submit.php', // Change this to your backend endpoint
                 type: 'POST',
-                data: $(this).serialize(),
+                data: serialize_data,
                 success: function(response) {
                     $("#response").addClass("alert alert-info").attr("role", "alert").html(response);
+                    addNewRow(serialize_data);
                 },
                 error: function() {
                     $("#response").addClass("alert alert-danger").attr("role", "alert").html('Error submitting the form');
@@ -101,4 +102,8 @@ $pdo = null;
             });
         });
     });
+
+    function addNewRow(serialize_data) {
+
+    }
 </script>
